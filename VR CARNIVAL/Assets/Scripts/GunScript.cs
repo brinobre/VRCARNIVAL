@@ -83,9 +83,9 @@ public class GunScript : MonoBehaviour
     // Shooting method for the gun
     void Shoot()
     {
-        //ShootLight?.Play();
+        ShootLight?.Play();
 
-        //shootAnim.SetTrigger("FireTrigg");
+        shootAnim.SetTrigger("shoot");
 
         currentAmmo--;
         
