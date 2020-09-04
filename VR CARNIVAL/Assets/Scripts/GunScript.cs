@@ -12,7 +12,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] float damage = 10f;
     [SerializeField] float range = 100f;
     [SerializeField] private ParticleSystem ShootLight;
-    [SerializeField] Camera fpsCam;
+    [SerializeField] GameObject gunObj;
     [SerializeField] private float impactForce = 30;
     [SerializeField] private float fireRate = 15;
     [SerializeField] private float nextTimeToFire = 0f;
@@ -56,7 +56,7 @@ public class GunScript : MonoBehaviour
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
 
-            FireAudio.Play();
+           // FireAudio.Play();
 
         }
 
@@ -70,11 +70,11 @@ public class GunScript : MonoBehaviour
     {
         isReloading = true;
 
-        reloadAnim.SetBool("Reloading", true);
+        //reloadAnim.SetBool("Reloading", true);
 
         yield return new WaitForSeconds(reloadTime);
 
-        reloadAnim.SetBool("Reloading", false);
+       // reloadAnim.SetBool("Reloading", false);
 
         currentAmmo = maxAmmo;
         isReloading = false;
@@ -83,20 +83,22 @@ public class GunScript : MonoBehaviour
     // Shooting method for the gun
     void Shoot()
     {
-        ShootLight.Play();
+        //ShootLight?.Play();
 
-        shootAnim.SetTrigger("FireTrigg");
+        //shootAnim.SetTrigger("FireTrigg");
 
         currentAmmo--;
-        /**
+        
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        if (Physics.Raycast(gunObj.transform.position, gunObj.transform.forward, out hit, range))
         {
-            Debug.Log(hit.transform.name);
-            ShootingTarget target = hit.transform.GetComponent<ShootingTarget>();
+            
+            TargetScript target = hit.transform.GetComponent<TargetScript>();
             if (target != null)
             {
+                Debug.Log("träff");
                 target.TakeDamage(damage);
+
             }
 
             if (hit.rigidbody != null)
@@ -107,6 +109,6 @@ public class GunScript : MonoBehaviour
             GameObject impactGo = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGo, 2f);
         
-        }**/
+        }
     }
 }
