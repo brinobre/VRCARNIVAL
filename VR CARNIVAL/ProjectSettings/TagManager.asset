@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Point
   - Ball
+  - win
+  - loss
+  - Arrow
   layers:
   - Default
   - TransparentFX
