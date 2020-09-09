@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 1ac9a5ce699cfb64ba37b64b9ec1034c
+  - enabled: 1
+    path: Assets/Scenes/VR CARNIVAL.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 862a6e5ef5d057d40b3b41e8d0666c2e, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ed32af8e9f610964e91c7ddedf1d648d, type: 2}
