@@ -1,40 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class GunScript : MonoBehaviour
 {
-    //Audiosources for the gun
-    private AudioSource FireAudio;
 
     /* Declaring all public variables*/
     [SerializeField] private GameObject impactEffect;
-    [SerializeField] float damage = 10f;
     [SerializeField] float range = 100f;
     [SerializeField] private ParticleSystem ShootLight;
     [SerializeField] GameObject gunObj;
-    [SerializeField] private float impactForce = 30;
-    [SerializeField] private float fireRate = 15;
-    [SerializeField] private float nextTimeToFire = 0f;
 
-    [SerializeField] private int maxAmmo = 10;
-    private int currentAmmo;
-    [SerializeField] private float reloadTime = 1f;
-    private bool isReloading = false;
+    // Target Points
+    [SerializeField] private GameObject Point;
 
-    // The animations used for the gun
-    private Animator shootAnim;
-    private Animator reloadAnim;
+    [SerializeField] private Text pointText;
 
-    // Declaring Oculus OVR controllers
-
+    private int currPoints = 0;
 
     private void Start()
     {
-        shootAnim = GetComponent<Animator>();
 
-        currentAmmo = maxAmmo;
-        FireAudio = GetComponent<AudioSource>();
+        // Converting points to 0 everytime the game starts
+        pointText.text = currPoints.ToString();
     }
 
 
@@ -42,52 +32,12 @@ public class GunScript : MonoBehaviour
     void Update()
     {
 
-        if (isReloading)
-            return;
-
-        if (currentAmmo <= 0f)
-        {
-            StartCoroutine(Reload());
-            return;
-        }
-
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
-        {
-            nextTimeToFire = Time.time + 1f / fireRate;
-            Shoot();
-
-           // FireAudio.Play();
-
-        }
-
-
-
-
     }
 
-    //Reload method for the gun
-    IEnumerator Reload()
-    {
-        isReloading = true;
-
-        //reloadAnim.SetBool("Reloading", true);
-
-        yield return new WaitForSeconds(reloadTime);
-
-       // reloadAnim.SetBool("Reloading", false);
-
-        currentAmmo = maxAmmo;
-        isReloading = false;
-    }
 
     // Shooting method for the gun
-    void Shoot()
+    public void Shoot()
     {
-        ShootLight?.Play();
-
-        shootAnim.SetTrigger("shoot");
-
-        currentAmmo--;
         
         RaycastHit hit;
         if (Physics.Raycast(gunObj.transform.position, gunObj.transform.forward, out hit, range))
@@ -96,14 +46,14 @@ public class GunScript : MonoBehaviour
             TargetScript target = hit.transform.GetComponent<TargetScript>();
             if (target != null)
             {
-                Debug.Log("träff");
-                target.TakeDamage(damage);
+                currPoints++;
+                pointText.text = currPoints.ToString();
 
-            }
-
-            if (hit.rigidbody != null)
+            } else
             {
-                hit.rigidbody.AddForce(-hit.normal * impactForce);
+                currPoints = 0;
+                pointText.text = currPoints.ToString();
+
             }
 
             GameObject impactGo = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
