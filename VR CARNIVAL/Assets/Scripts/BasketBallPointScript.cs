@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BasketBallPointScript : MonoBehaviour
 {
-
+    // Declaring all public GameObjects
     [SerializeField]private GameObject Ball;
     
     [SerializeField]private GameObject Point;

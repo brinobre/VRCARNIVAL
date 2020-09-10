@@ -42,7 +42,7 @@ public class GunScript : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(gunObj.transform.position, gunObj.transform.forward, out hit, range))
         {
-            
+            // If the target getting shot at has the TargetScript, this code runs
             TargetScript target = hit.transform.GetComponent<TargetScript>();
             if (target != null)
             {
