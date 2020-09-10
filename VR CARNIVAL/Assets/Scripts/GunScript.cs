@@ -38,7 +38,7 @@ public class GunScript : MonoBehaviour
     // Shooting method for the gun
     public void Shoot()
     {
-        
+
         RaycastHit hit;
         if (Physics.Raycast(gunObj.transform.position, gunObj.transform.forward, out hit, range))
         {
@@ -55,7 +55,7 @@ public class GunScript : MonoBehaviour
                 pointText.text = currPoints.ToString();
 
             }
-
+            // Instantiates impact effect from gun when fired
             GameObject impactGo = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGo, 2f);
         

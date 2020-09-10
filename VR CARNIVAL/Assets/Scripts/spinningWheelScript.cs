@@ -27,10 +27,14 @@ public class spinningWheelScript : MonoBehaviour
     {
         
         {
+            //IF the arrow object collides with a "win" collider, following happens
             if (other.gameObject.tag == "win")
             {
                 resultText.text = "Congrats!";
-            } else if(other.gameObject.tag == "loss")
+
+            //IF the arrow object collides with a "loss" collider, following happens
+            }
+            else if(other.gameObject.tag == "loss")
             {
                 resultText.text = "Try again!";
             }
