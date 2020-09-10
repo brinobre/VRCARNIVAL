@@ -7,31 +7,35 @@ public class HandHider : MonoBehaviour
 
     private HandPhysics handPhysics = null;
     private XRDirectInteractor interactor = null;
+    // Setting variables for the functions used in script
 
     private void Awake()
     {
         handPhysics = handObject.GetComponent<HandPhysics>();
         interactor = GetComponent<XRDirectInteractor>();
     }
+        // Script to apply the handphysics and interactor functions on awake
 
     private void OnEnable()
     {
         interactor.onSelectEnter.AddListener(Hide);
         interactor.onSelectExit.AddListener(Show);
     }
+        // Script to hide or show hands when something is selected
 
     private void OnDisable()
     {
         interactor.onSelectEnter.RemoveListener(Hide);
         interactor.onSelectExit.RemoveListener(Show);
     }
+    // Script to hide and controllers on interact with objects
 
     private void Show(XRBaseInteractable interactable)
     {
         handPhysics.TeleportToTarget();
         handObject.SetActive(true);
     }
-
+        //Script to teleport hands to where the controllers are, when they're activated.
     private void Hide(XRBaseInteractable interactable)
     {
         handObject.SetActive(false);

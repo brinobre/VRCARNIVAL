@@ -7,6 +7,7 @@
     Ring,
     Pinky
 }
+// Script to differentiate between the different fingers
 
 public class Finger
 {
@@ -18,4 +19,5 @@ public class Finger
     {
         this.type = type;
     }
+    // Script to hold the value it is at the time and what it will be. And smooth out the transition
 }

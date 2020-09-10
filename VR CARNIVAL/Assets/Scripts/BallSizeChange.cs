@@ -9,7 +9,7 @@ public class BallSizeChange : MonoBehaviour
         transform.localScale *= 1.1f;
     }
     //Function to increase size of object
-    public void ShrinkBall()
+   public void ShrinkBall()
     {
         transform.localScale *= 0.1f;
     }
