@@ -12,7 +12,7 @@ public class BallReset : MonoBehaviour
    {
         startPosition = transform.position;
    }
-    // Remembering where the ball started
+    // Saving the spot of the ball when scene loaded
    void Update()
    {
    if (transform.position.y < -5f)
@@ -20,6 +20,6 @@ public class BallReset : MonoBehaviour
             transform.position = startPosition;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
-   // Reset of the ball is triggered when the ball is falling with the force of 5
+   // Reset of the ball is triggered when the ball is falling at -5y
    }
 }

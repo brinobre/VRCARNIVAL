@@ -17,11 +17,9 @@ public class ResetKegelScript : MonoBehaviour
             startPos.Add(child.position);
             kegels.Add(child);
             startRot.Add(child.rotation);
-
+            // Script saves the position and rotation at the start of the scene
         }
     }
-
-    // Update is called once per frame
     void Update()
     {
         foreach (Transform child in kegels)
@@ -37,6 +35,7 @@ public class ResetKegelScript : MonoBehaviour
             Reset();
         }
     }
+    // Script is checking if ALL the kegels have fallen of the platform at -5y
 
     void Reset()
     {
@@ -50,5 +49,6 @@ public class ResetKegelScript : MonoBehaviour
             r.angularVelocity = Vector3.zero;
         }
         numKegelsDown = 0;
+        // Script gives the same values of the original position and rotation for respawn
     }
 }
